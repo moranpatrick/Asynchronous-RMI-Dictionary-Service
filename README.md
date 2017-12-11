@@ -18,6 +18,6 @@ to an in-queue and then returns a job ID to the web client. The web client shoul
 (every 10 seconds) and query if the request has been processed. Client requests in the inQueue should
 be periodically removed and processed (every 10 seconds). An overview of the project can be viewed below.
 
-<img src="Screen1.png" border="3">     
+<img src="Screen1.PNG" border="3">     
 
 [Top](#contents) 
