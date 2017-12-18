@@ -10,12 +10,11 @@
 	<table width="600" cellspacing="0" cellpadding="7" border="1" style="text-align:center">
 		<tr>
 			<td valign="top">	
-				<form  method="POST" enctype="multipart/form-data" action="submit">
+				<form  method="get" enctype="multipart/form-data" action="test">
 						<h2>Dictionary Service</h2>	
 						<input name="query" placeholder="Enter Query Here" type="text" size="50"/>
 						<input type="submit" value="Submit">											
-				</form>	
-	
+				</form>		
 			</td>
 		</tr>
 	</table>
