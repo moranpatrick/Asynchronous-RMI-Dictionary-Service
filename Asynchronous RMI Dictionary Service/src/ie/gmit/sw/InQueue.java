@@ -6,26 +6,18 @@ import java.util.concurrent.BlockingQueue;
 public class InQueue implements Runnable {
 	private Query query;
 	
-	BlockingQueue<Query> queue = new ArrayBlockingQueue<Query>(10);
+	private BlockingQueue<Query> queue;
 	
 	public InQueue(Query query) {
 		this.query = query;
-		System.out.println("In INQ Constructor");
+		queue = new ArrayBlockingQueue<Query>(10);
+		queue.add(query);
+		System.out.println("IN CONSTRUCTOR: \nNumber Of Items In Queue: " + queue.size());
 	}
 	
 	@Override
 	public void run() {
-        System.out.println("Thread Started: In Run()");
-		
-        try {
-			queue.put(query);
-			System.out.println("Total Objects In Queue: " + queue.size());
-			System.out.println("Objects In This Queue: " + queue.toArray());
-			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println("Thread Starting...");
 		
 	}
 }

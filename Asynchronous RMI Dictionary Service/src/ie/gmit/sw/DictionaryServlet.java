@@ -1,6 +1,8 @@
 package ie.gmit.sw;
 
 import java.io.IOException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -18,6 +20,7 @@ public class DictionaryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Query query = null;
 	private Map<String, Query> queries = new HashMap<String, Query>();
+	String test;
 	
 	Thread inQueue;
 	
@@ -40,17 +43,24 @@ public class DictionaryServlet extends HttpServlet {
 		
 		queries.put(Integer.toString(idCounter), query);
 			
-		inQueue = new Thread(new InQueue(query));
-		inQueue.start();
+		Runnable r = new InQueue(query);
+		new Thread(r).start();
 					
 		request.setAttribute("queries", queries);
 		
+		try {
+			DictionaryService ds = (DictionaryService) Naming.lookup("rmi://127.0.0.1:1099/dictionaryService");
+			test = ds.findDefinition(request.getParameter("query"));
+		} catch (NotBoundException e) {
+			
+			e.printStackTrace();
+		}
+		System.out.println("Message From Remote Server!: " + test);
 		this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);	
 	}
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		doGet(request, response);
 	}
 
