@@ -1,4 +1,4 @@
-package ie.gmit.sw;
+package ie.gmit.sw.server;
 
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;

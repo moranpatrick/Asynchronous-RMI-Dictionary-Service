@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="ie.gmit.sw.Query"%>
+<%@page import="ie.gmit.sw.client.Query"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Map.Entry"%>
 <%@page import="java.util.HashMap"%>
@@ -20,6 +20,7 @@
 			<input name="query" placeholder="Enter Query Here" type="text" size="50"/>
 			<input type="submit" value="Submit">											
 	</form>		
+	
 	
 	<% 	Map<String, Query> queries = (HashMap<String, Query>)request.getAttribute("queries");
 		if(queries == null){

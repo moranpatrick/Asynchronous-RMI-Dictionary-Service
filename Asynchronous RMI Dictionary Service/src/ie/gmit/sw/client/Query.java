@@ -1,4 +1,4 @@
-package ie.gmit.sw;
+package ie.gmit.sw.client;
 
 public class Query {
 	private int jobID;
@@ -26,4 +26,16 @@ public class Query {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if((Integer) obj == this.getJobID()){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	
 }
