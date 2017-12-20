@@ -13,50 +13,44 @@ import ie.gmit.sw.server.DictionaryService;
 public class RMIWorker implements Runnable{
 	/* RMI Worker class handles Two Queues - One In and One Out Queue */
 	private BlockingQueue<Query> inQ;
-	private BlockingQueue<Query> outQ;
-	
+	private BlockingQueue<Query> outQ;	
 	private Query query;
-	private String test;
+	private String definition;
+	
 	public RMIWorker(BlockingQueue<Query> inQ, BlockingQueue<Query> outQ) {
 		this.inQ = inQ;
 		this.outQ = outQ;
 	}
 	
 	@Override
-	public void run() {
-		System.out.println("Thread Started...");
-		
+	public void run() {		
 		while(true){
 			
 			try {
-				//Thread.sleep(10000);
-				// Poll the Web Server every 10 Seconds
+				// Poll the In Queue every 10 Seconds
 				query = inQ.poll(10, TimeUnit.SECONDS);
-				System.out.println("Number of Objects in Q: " + inQ.size());				
+				
+				//Ask the registry listening in port 1099 for the instance of the DictionaryService Object
 				DictionaryService ds = (DictionaryService) Naming.lookup("rmi://127.0.0.1:1099/dictionaryService");
 				
 				if(query != null){
-					test = ds.findDefinition(query.getMessage());
-					System.out.println("RMI Response: " + test);
+					//Thread.sleep(10000);
+					definition = ds.findDefinition(query.getMessage());
 					
-					query = new Query(query.getJobID(), test);
-					outQ.add(query);
-				}
-											
+					// Create a new Query with the JobId and Definition and add it to the OutQ
+					query = new Query(query.getJobID(), definition);
+					outQ.offer(query);
+					//System.out.println("Number of Objects in outQ: " + outQ.size());
+				}										
 			} catch (InterruptedException e) {				
 				e.printStackTrace();
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
+			} catch (RemoteException e) {			
 				e.printStackTrace();
-			} catch (NotBoundException e) {
-				// TODO Auto-generated catch block
+			} catch (NotBoundException e) {				
 				e.printStackTrace();
-			}
-			
-		}
-		
+			}			
+		}		
 	}	
 }

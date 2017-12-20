@@ -1,28 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="ie.gmit.sw.client.Query"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.Map.Entry"%>
-<%@page import="java.util.HashMap"%>
-
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
+
 <title>Dictionary Service</title>
 </head>
-<body>	
-	
+<body>		
 	<h2>Dictionary Service</h2>
-	<form  method="get" action="DictionaryServlet">
-		<input name="jobID" value=<%=request.getAttribute("jobId")%> type="text" size="50"/>
-		<input type="submit" value="Submit">											
-	</form>	
+	<form name="myForm" method="get" action="DictionaryServlet">
+		<input name="jobID" value=<%=request.getAttribute("jobId")%> type="hidden"/>												
+	</form>		
+	<%=request.getAttribute("definition")%>
+	<br />
+	<br />
+	<a href="index.jsp"><button>Make Another Query</button></a>
 	
-	Definition = <%=request.getAttribute("definition")%>
-	
-
+	<script type="text/javascript">
+		window.onload=function(){ 
+		    window.setTimeout(function() { document.myForm.submit(); }, 5000);
+		};
+	</script>
 </body>
 </html>

@@ -27,6 +27,7 @@ public class Query {
 		this.message = message;
 	}
 
+	// Override the equals method so we can compared objects based upon their jobId
 	@Override
 	public boolean equals(Object obj) {
 		if((Integer) obj == this.getJobID()){
@@ -35,7 +36,5 @@ public class Query {
 		else{
 			return false;
 		}
-	}
-	
-	
+	}	
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/* This Class, which Makes a Dictionary HashMap from a csv file, was taken from my second year OO Project Book Indexing Project */
+/* This Class, which Makes a Dictionary HashMap from a dictionary csv file, was taken from my second year OO Project Book Indexing Project */
 public class Dictionary {
 	private String csvFile = "Resources/dictionary.csv";
 	private StringBuilder wordDefinition = new StringBuilder();
@@ -36,7 +36,6 @@ public class Dictionary {
 				word = line.substring(1,  endOfWord);//makes a word from one quote to the next double quote
 				wordDefinition.append((line.substring(endOfWord + 2)));//add the rest of the line to wordDefiniton 2 chars after end of the word
 				wordDefinition.append("\n");//add a new line
-
 			}
 			else{
 				wordDefinition.append((line));//other wise append the full line of text
@@ -44,10 +43,9 @@ public class Dictionary {
 			}
 		}//while
 		br.close();
-
 	}
 	
-	//add the word and the definition to the dictionary hash map
+	//Add the word and the definition to the dictionary hash map
 	public void addDefinition(String word, String def){
 		if(dictionary.containsKey(word)){
 			List<String> definition = dictionary.get(word);
@@ -59,7 +57,7 @@ public class Dictionary {
 			definition.add(def);
 			dictionary.put(word, definition);
 		}
-	}//addDefinition()
+	}
 	
 	// Gets The Definition When Called 
 	public List<String> get(String definition) {

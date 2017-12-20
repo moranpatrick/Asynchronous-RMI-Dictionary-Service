@@ -20,26 +20,6 @@
 			<input name="query" placeholder="Enter Query Here" type="text" size="50"/>
 			<input type="submit" value="Submit">											
 	</form>		
-	
-	
-	<% 	Map<String, Query> queries = (HashMap<String, Query>)request.getAttribute("queries");
-		if(queries == null){
-			//empty
-		}
-		else
-		{
-			out.print("<h3>Jobs in Queue</h3>");
-		 	for(Entry<String, Query> entry : queries.entrySet())
-		 	{
-				Query q = entry.getValue();
-				out.print("Query: " + q.getMessage());
-				out.print("<br/>");
-				out.print("Job Id: " + q.getJobID());
-				out.print("<br/>");
-				out.print("<br/>");
-	 		}
-		}
-	%>
 
 </body>
 </html>
