@@ -26,10 +26,7 @@ public class DictionaryServiceImpl extends UnicastRemoteObject implements Dictio
 		}	
 		else{
 			// Definition Not Found For Query
-			return "Word \"" + query.toLowerCase()  + "\" ==> Sorry, There is no Definition in the Dictionary for this word";
-		
-		}
-		
+			return "Word \"" + query.toLowerCase()  + "\" ==> Sorry, There is no Definition in the Dictionary for this word";	
+		}		
 	}
-
 }
