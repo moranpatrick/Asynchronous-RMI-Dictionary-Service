@@ -3,6 +3,8 @@ package ie.gmit.sw.client;
 import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,13 +27,13 @@ public class DictionaryServlet extends HttpServlet {
     }
     	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String definition = "*d:* ";
-		System.out.println("In GET: definition: " + definition);
+		String definition;
 
 		definition = checkQueue(request.getParameter("jobID"));
-		System.out.println("DEFINITION: " + definition + "JobID: " + request.getParameter("jobID"));
-		request.setAttribute("definition", definition);
 		
+		request.setAttribute("definition", definition);
+
+		request.setAttribute("jobId", query.getJobID());
 		this.getServletContext().getRequestDispatcher("/result.jsp").forward(request, response);
 	}
 
@@ -51,23 +53,18 @@ public class DictionaryServlet extends HttpServlet {
 	}
 	
 	public String checkQueue(String id){
-		System.out.println("Checking JobID: " + id);
 		String result = "";
 		
 		// Retrieves but does not remove the head of the queue
 		Query _query = outQ.peek();
 		
-		System.out.println("Out Q Size: " + outQ.size());
-		
-		// Using the Override Equals Method in Query Class we can compare on JobId'd
+		// Using the Override Equals Method in Query Class we can compare on JobId's
 		if(_query != null && _query.getJobID() == Integer.parseInt(id)){
 			result = outQ.poll().getMessage();
 		}
 		else{
 			result = "No";
 		}
-
-		return result;
+		return result;		
 	}
-
 }

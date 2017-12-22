@@ -10,12 +10,10 @@
 <title>Dictionary Service</title>
 </head>
 <body>
-
-	<form  method="post" action="DictionaryServlet">
+	<form method="post" action="DictionaryServlet">
 			<h2>Dictionary Service</h2>	
 			<input name="query" placeholder="Enter Query Here" type="text" size="50"/>
 			<input type="submit" value="Submit">											
 	</form>		
-
 </body>
 </html>

@@ -1,3 +1,5 @@
+/* This Class, which Makes a Dictionary HashMap from a dictionary csv file, 
+ * was taken from my second year OO Project, Book Indexing Project */
 package ie.gmit.sw.server;
 
 import java.io.BufferedReader;
@@ -8,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/* This Class, which Makes a Dictionary HashMap from a dictionary csv file, was taken from my second year OO Project Book Indexing Project */
 public class Dictionary {
 	private String csvFile = "Resources/dictionary.csv";
 	private StringBuilder wordDefinition = new StringBuilder();

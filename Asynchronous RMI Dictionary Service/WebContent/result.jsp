@@ -13,26 +13,27 @@
 	<h2>Dictionary Service</h2>
 	<form name="myForm" method="get" action="DictionaryServlet">
 		<input name="jobID" value=<%=request.getAttribute("jobId")%> type="hidden"/>												
-	</form>
-	<%
-		String definition = (String)request.getAttribute("definition");
-		if(definition == null || definition == "No"){
-			out.println("Waiting For Response...");
-		}
-		else{
-			out.print("<b>Response:</b> " + definition);
-		}
 	
-	%>	
-	<%-- <%=request.getAttribute("definition")%> --%>
+		<%
+			String definition = (String)request.getAttribute("definition");
+			String jobID = (String)request.getAttribute("jobId").toString();
+			if(definition == null || definition == "No"){
+				out.println("Waiting For Response...");
+			}
+			else{
+				out.print("<b>Response:</b> " + definition);
+			}
+		%>	
+	</form>
 	<br />
 	<br />
 	<a href="index.jsp"><button>Make Another Query</button></a>
 	
 	<script type="text/javascript">
-		// Reloads The page every 10 seconds and the form does a get - polling the out queue for a response
-		window.setTimeout(function() { document.myForm.submit(); }, 5000);		
+		// Reloads The page every 10 seconds and the form does a get - which polls the out queue for a response
+		window.setTimeout(function() { document.myForm.submit(); }, 10000);
 	</script>
+
 	
 </body>
 </html>
